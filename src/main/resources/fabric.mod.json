@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "onyx-client-core",
+	"version": "${version}",
+	"name": "Onyx Client (Core)",
+	"description": "Core mod for Onyx Client",
+	"authors": [
+		"Arslaan Pathan"
+	],
+	"contact": {
+		"homepage": "https://arslaanpathan3102.carrd.co/"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/onyx-client-core/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.onyxclient.onyxclientcore.OnyxClientCore"
+		],
+		"fabric-datagen": [
+			"com.onyxclient.onyxclientcore.OnyxClientCoreDataGenerator"
+		],
+		"client": [
+			"com.onyxclient.onyxclientcore.OnyxClient_Client"
+		]
+	},
+	"mixins": [
+		"onyx-client-core.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.13",
+		"minecraft": "~1.21.5",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
