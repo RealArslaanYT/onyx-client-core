@@ -45,14 +45,14 @@ public class CustomMainMenuScreen extends Screen {
                     client.setScreen(new OptionsScreen(this, client.options));
                 })
                 .dimensions(width / 2 - 100, height / 2 + 30, 200, 20)
-                .tooltip(Tooltip.of(Text.literal("Join a server")))
+                .tooltip(Tooltip.of(Text.literal("Change settings")))
                 .build();
 
         quitButton = ButtonWidget.builder(Text.literal("Quit"), button -> {
                     client.scheduleStop(); // Cleanly exits the game
                 })
-                .dimensions(width - 60, 10, 50, 20)
-                .tooltip(Tooltip.of(Text.literal("Exit the game")))
+                .dimensions(width - 50, 10, 40, 20)
+                .tooltip(Tooltip.of(Text.literal("Quit the game")))
                 .build();
 
         addDrawableChild(singleplayerButton);
