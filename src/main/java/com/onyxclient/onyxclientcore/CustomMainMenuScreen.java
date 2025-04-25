@@ -75,8 +75,8 @@ public class CustomMainMenuScreen extends Screen {
 
         float alpha = 1.0F;
 
-        int logoWidth = 80;
-        int logoHeight = 80;
+        int logoWidth = 90;
+        int logoHeight = 90;
         int x = this.width / 2 - logoWidth / 2;
         int y = 25;
 
@@ -85,5 +85,10 @@ public class CustomMainMenuScreen extends Screen {
 
         int i = MathHelper.ceil(alpha * 255.0F) << 24;
         context.drawTextWithShadow(this.textRenderer, "Onyx Client 1.21.5", 2, this.height - 10, 16777215 | i);
+
+        String copyrightText = "Copyright Mojang AB. Do not distribute!";
+        int copyrightTextWidth = this.textRenderer.getWidth(Text.literal(copyrightText));
+        int copyrightX = this.width - copyrightTextWidth - 2;
+        context.drawTextWithShadow(this.textRenderer, copyrightText, copyrightX, this.height - 10, 16777215 | i);
     }
 }
