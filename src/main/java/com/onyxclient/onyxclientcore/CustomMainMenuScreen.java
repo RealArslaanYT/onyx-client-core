@@ -30,28 +30,28 @@ public class CustomMainMenuScreen extends Screen {
         singleplayerButton = ButtonWidget.builder(Text.literal("Singleplayer"), button -> {
                     client.setScreen(new SelectWorldScreen(this));
                 })
-                .dimensions(width / 2 - 100, height / 2 - 20, 200, 20)
+                .dimensions(width / 2 - 100, height / 2 - 35, 200, 20)
                 .tooltip(Tooltip.of(Text.literal("Play a world")))
                 .build();
 
         multiplayerButton = ButtonWidget.builder(Text.literal("Multiplayer"), button -> {
                     client.setScreen(new MultiplayerScreen(this));
                 })
-                .dimensions(width / 2 - 100, height / 2 + 5, 200, 20)
+                .dimensions(width / 2 - 100, height / 2 - 10, 200, 20)
                 .tooltip(Tooltip.of(Text.literal("Join a server")))
                 .build();
 
         optionsButton = ButtonWidget.builder(Text.literal("Options"), button -> {
                     client.setScreen(new OptionsScreen(this, client.options));
                 })
-                .dimensions(width / 2 - 100, height / 2 + 30, 200, 20)
+                .dimensions(width / 2 - 100, height / 2 + 25, 95, 20)
                 .tooltip(Tooltip.of(Text.literal("Change settings")))
                 .build();
 
         quitButton = ButtonWidget.builder(Text.literal("Quit"), button -> {
                     client.scheduleStop(); // Cleanly exits the game
                 })
-                .dimensions(width - 50, 10, 40, 20)
+                .dimensions(width / 2 + 5, height / 2 + 25, 95, 20)
                 .tooltip(Tooltip.of(Text.literal("Quit the game")))
                 .build();
 
