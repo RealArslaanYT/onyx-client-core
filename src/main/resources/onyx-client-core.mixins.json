@@ -3,7 +3,8 @@
 	"package": "com.onyxclient.onyxclientcore.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"TitleScreenMixin"
+		"TitleScreenMixin",
+		"MinecraftClientMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
