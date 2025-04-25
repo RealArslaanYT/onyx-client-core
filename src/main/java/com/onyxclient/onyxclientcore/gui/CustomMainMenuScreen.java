@@ -1,4 +1,4 @@
-package com.onyxclient.onyxclientcore;
+package com.onyxclient.onyxclientcore.gui;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -22,7 +22,6 @@ public class CustomMainMenuScreen extends Screen {
         super(Text.literal("Onyx Client"));
     }
 
-    private static final Identifier TEST_TEXTURE = Identifier.ofVanilla("textures/gui/title/minecraft.png");
     private static final Identifier ONYX_LOGO = Identifier.of("onyx-client-core", "textures/gui/logo.png");
     public ButtonWidget singleplayerButton;
     public ButtonWidget multiplayerButton;

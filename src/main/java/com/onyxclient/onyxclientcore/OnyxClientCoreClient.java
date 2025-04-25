@@ -1,15 +1,15 @@
 package com.onyxclient.onyxclientcore;
 
-import com.onyxclient.onyxclientcore.mods.Mod;
 import com.onyxclient.onyxclientcore.mods.ModManager;
+import com.onyxclient.onyxclientcore.gui.ModMenuScreen;
 import com.onyxclient.onyxclientcore.mods.impl.OldCombat;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.CreditsScreen;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
 public class OnyxClientCoreClient implements ClientModInitializer {
@@ -26,16 +26,22 @@ public class OnyxClientCoreClient implements ClientModInitializer {
                 "category.onyxclient"
         ));
 
-        net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(client -> {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (modMenuKeyBind.wasPressed()) {
-                client.setScreen(new CreditsScreen(true, null));
+                client.setScreen(new ModMenuScreen());
             }
         });
 
-        // Mod registration
-        // TODO: Register mods here
+        ClientPlayConnectionEvents.JOIN.register((clientPlayNetworkHandler, packetSender, minecraftClient) -> {
+            String keyName = modMenuKeyBind.getBoundKeyLocalizedText().getString();
+            minecraftClient.player.sendMessage(Text.of("Press " + keyName + " to open Mod Menu"), true);
+        });
+
+        registerMods();
+    }
+
+    private void registerMods() {
         ModManager.getInstance().register(oldCombatMod);
-        //ModManager.getInstance().toggleMod(oldCombatMod);
 
         // Register mod tick events
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

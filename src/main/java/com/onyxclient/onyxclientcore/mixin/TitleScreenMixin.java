@@ -1,6 +1,6 @@
 package com.onyxclient.onyxclientcore.mixin;
 
-import com.onyxclient.onyxclientcore.CustomMainMenuScreen;
+import com.onyxclient.onyxclientcore.gui.CustomMainMenuScreen;
 import com.onyxclient.onyxclientcore.OnyxClientCore;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.TitleScreen;

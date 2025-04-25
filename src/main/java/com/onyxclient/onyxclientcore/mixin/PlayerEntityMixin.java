@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityMixin {
     @Inject(method = "getAttackCooldownProgress", at = @At("HEAD"), cancellable = true)
     private void onGetAttackCooldownProgress(CallbackInfoReturnable<Float> cir) {
-        if (OnyxClientCoreClient.oldCombatMod.enabled) cir.setReturnValue(1.0F);
+        if (OnyxClientCoreClient.oldCombatMod.isEnabled()) cir.setReturnValue(1.0F);
     }
 }
