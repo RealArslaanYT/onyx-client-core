@@ -21,7 +21,7 @@
 			"com.onyxclient.onyxclientcore.OnyxClientCoreDataGenerator"
 		],
 		"client": [
-			"com.onyxclient.onyxclientcore.OnyxClient_Client"
+			"com.onyxclient.onyxclientcore.OnyxClientCoreClient"
 		]
 	},
 	"mixins": [
