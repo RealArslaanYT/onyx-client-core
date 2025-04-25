@@ -2,36 +2,63 @@ package com.onyxclient.onyxclientcore;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
+import net.minecraft.client.gui.screen.option.OptionsScreen;
+import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class CustomMainMenuScreen extends Screen {
-    protected CustomMainMenuScreen() {
+    public CustomMainMenuScreen() {
         super(Text.literal("Onyx Client"));
     }
 
-    public ButtonWidget button1;
-    public ButtonWidget button2;
+    public ButtonWidget singleplayerButton;
+    public ButtonWidget multiplayerButton;
+    public ButtonWidget optionsButton;
+
+    public ButtonWidget quitButton;
 
     @Override
     protected void init() {
-        button1 = ButtonWidget.builder(Text.literal("Button 1"), button -> {
-                    System.out.println("You clicked button1!");
+        MinecraftClient client = MinecraftClient.getInstance();
+
+        singleplayerButton = ButtonWidget.builder(Text.literal("Singleplayer"), button -> {
+                    client.setScreen(new SelectWorldScreen(this));
                 })
-                .dimensions(width / 2 - 205, 20, 200, 20)
-                .tooltip(Tooltip.of(Text.literal("Tooltip of button1")))
-                .build();
-        button2 = ButtonWidget.builder(Text.literal("Button 2"), button -> {
-                    System.out.println("You clicked button2!");
-                })
-                .dimensions(width / 2 + 5, 20, 200, 20)
-                .tooltip(Tooltip.of(Text.literal("Tooltip of button2")))
+                .dimensions(width / 2 - 100, height / 2 - 20, 200, 20)
+                .tooltip(Tooltip.of(Text.literal("Play a world")))
                 .build();
 
-        addDrawableChild(button1);
-        addDrawableChild(button2);
+        multiplayerButton = ButtonWidget.builder(Text.literal("Multiplayer"), button -> {
+                    client.setScreen(new MultiplayerScreen(this));
+                })
+                .dimensions(width / 2 - 100, height / 2 + 5, 200, 20)
+                .tooltip(Tooltip.of(Text.literal("Join a server")))
+                .build();
+
+        optionsButton = ButtonWidget.builder(Text.literal("Options"), button -> {
+                    client.setScreen(new OptionsScreen(this, client.options));
+                })
+                .dimensions(width / 2 - 100, height / 2 + 30, 200, 20)
+                .tooltip(Tooltip.of(Text.literal("Join a server")))
+                .build();
+
+        quitButton = ButtonWidget.builder(Text.literal("Quit"), button -> {
+                    client.scheduleStop(); // Cleanly exits the game
+                })
+                .dimensions(width - 60, 10, 50, 20)
+                .tooltip(Tooltip.of(Text.literal("Exit the game")))
+                .build();
+
+        addDrawableChild(singleplayerButton);
+        addDrawableChild(multiplayerButton);
+        addDrawableChild(optionsButton);
+        addDrawableChild(quitButton);
     }
+
 }
