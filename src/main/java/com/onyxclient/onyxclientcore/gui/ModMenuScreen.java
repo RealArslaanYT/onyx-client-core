@@ -3,10 +3,11 @@ package com.onyxclient.onyxclientcore.gui;
 import com.onyxclient.onyxclientcore.mods.Mod;
 import com.onyxclient.onyxclientcore.mods.ModManager;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +28,12 @@ public class ModMenuScreen extends Screen {
 
         int yOffset = 20;
         for (Mod mod : mods) {
-            String modString = "";
-            if (mod.isEnabled()) modString = "* ";
-            modString = modString + mod.getName();
-            ButtonWidget modButton = ButtonWidget.builder(Text.literal(modString), button -> {
+            String modString = mod.isEnabled() ? "✔ " + mod.getName() : mod.getName();
+            int buttonColor = mod.isEnabled() ? 0x00FF00 : 0xFFFFFF;
+            Text coloredText = Text.of(modString)
+                    .copy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(buttonColor)));
+
+            ButtonWidget modButton = ButtonWidget.builder(coloredText, button -> {
                         modManager.toggleMod(mod);
                         this.clearChildren();
                         this.init();
