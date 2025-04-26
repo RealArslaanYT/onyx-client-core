@@ -8,9 +8,9 @@ import net.minecraft.text.Text;
 
 public class OldCombat extends Mod {
     public OldCombat() {
-        name = "1.8-style Combat";
-        description = "Brings back the old combat style from pre-1.9! (May get you banned on some servers.)";
-        enabled = false;
+        this.name = "1.8-style Combat";
+        this.description = "Brings back the old combat style from pre-1.9! (May get you banned on some servers.)";
+        this.enabled = false;
     }
 
     @Override

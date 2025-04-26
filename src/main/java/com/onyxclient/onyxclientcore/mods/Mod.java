@@ -1,8 +1,8 @@
 package com.onyxclient.onyxclientcore.mods;
 
 public class Mod {
-    public static String name;
-    public static String description;
+    public String name;
+    public String description;
     public boolean enabled = false;
 
     public String getName() {
@@ -18,10 +18,14 @@ public class Mod {
     }
 
     public void init() {
-
+        // Runs before mod starts
     }
 
     public void update() {
         // Runs every tick
+    }
+
+    public void close() {
+        // Runs before/when mod is disabled
     }
 }

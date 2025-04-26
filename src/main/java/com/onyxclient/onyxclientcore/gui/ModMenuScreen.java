@@ -1,5 +1,6 @@
 package com.onyxclient.onyxclientcore.gui;
 
+import com.onyxclient.onyxclientcore.OnyxClientCore;
 import com.onyxclient.onyxclientcore.mods.Mod;
 import com.onyxclient.onyxclientcore.mods.ModManager;
 import net.minecraft.client.gui.screen.Screen;
@@ -30,6 +31,11 @@ public class ModMenuScreen extends Screen {
         for (Mod mod : mods) {
             String modString = mod.isEnabled() ? "✔ " + mod.getName() : mod.getName();
             int buttonColor = mod.isEnabled() ? 0x00FF00 : 0xFFFFFF;
+
+            // Debug print to check if the correct mod name is being used
+            OnyxClientCore.LOGGER.info("Mod: {}", mod);
+            OnyxClientCore.LOGGER.info("Displaying mod: {}", mod.getName());
+
             Text coloredText = Text.of(modString)
                     .copy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(buttonColor)));
 
@@ -45,6 +51,7 @@ public class ModMenuScreen extends Screen {
             yOffset = yOffset + BUTTON_HEIGHT + 2;
             buttons.add(modButton);
         }
+
 
         for (ButtonWidget button : buttons) {
             addDrawableChild(button);

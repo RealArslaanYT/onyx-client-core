@@ -24,7 +24,7 @@ public class ModManager {
 
     public boolean toggleMod(Mod mod) {
         mod.enabled = !mod.enabled;
-        if (mod.enabled) mod.init();
+        if (mod.enabled) mod.init(); else mod.close();
         return mod.enabled;
     }
 
@@ -33,6 +33,13 @@ public class ModManager {
             if (mod.enabled) {
                 mod.update();
             }
+        }
+    }
+
+    public void close() {
+        // To run when client is closing/stopping
+        for (Mod mod: mods) {
+            mod.close();
         }
     }
 
