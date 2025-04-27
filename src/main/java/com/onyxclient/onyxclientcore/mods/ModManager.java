@@ -24,13 +24,13 @@ public class ModManager {
 
     public boolean toggleMod(Mod mod) {
         mod.enabled = !mod.enabled;
-        if (mod.enabled) mod.init(); else mod.close();
-        return mod.enabled;
+        if (mod.isEnabled()) mod.init(); else mod.close();
+        return mod.isEnabled();
     }
 
     public void update() {
         for (Mod mod : mods) {
-            if (mod.enabled) {
+            if (mod.isEnabled()) {
                 mod.update();
             }
         }

@@ -4,6 +4,7 @@ import com.onyxclient.onyxclientcore.mods.ModManager;
 import com.onyxclient.onyxclientcore.gui.ModMenuScreen;
 import com.onyxclient.onyxclientcore.mods.impl.OldCombat;
 import com.onyxclient.onyxclientcore.mods.impl.hud.CoordinatesHUD;
+import com.onyxclient.onyxclientcore.mods.impl.hud.KeystrokesHUD;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -18,6 +19,7 @@ public class OnyxClientCoreClient implements ClientModInitializer {
     public static KeyBinding modMenuKeyBind;
     public static OldCombat oldCombatMod = new OldCombat();
     public static CoordinatesHUD coordinatesHUDMod = new CoordinatesHUD();
+    public static KeystrokesHUD keystrokesHUDMod = new KeystrokesHUD();
 
     @Override
     public void onInitializeClient() {
@@ -47,6 +49,7 @@ public class OnyxClientCoreClient implements ClientModInitializer {
     private void registerMods() {
         ModManager.getInstance().register(oldCombatMod);
         ModManager.getInstance().register(coordinatesHUDMod);
+        ModManager.getInstance().register(keystrokesHUDMod);
 
         // Register mod tick events
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
