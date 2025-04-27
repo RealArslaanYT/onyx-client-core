@@ -2,6 +2,7 @@ package com.onyxclient.onyxclientcore;
 
 import com.onyxclient.onyxclientcore.mods.ModManager;
 import com.onyxclient.onyxclientcore.gui.ModMenuScreen;
+import com.onyxclient.onyxclientcore.mods.impl.Freelook;
 import com.onyxclient.onyxclientcore.mods.impl.OldCombat;
 import com.onyxclient.onyxclientcore.mods.impl.hud.CoordinatesHUD;
 import com.onyxclient.onyxclientcore.mods.impl.hud.KeystrokesHUD;
@@ -20,6 +21,7 @@ public class OnyxClientCoreClient implements ClientModInitializer {
     public static OldCombat oldCombatMod = new OldCombat();
     public static CoordinatesHUD coordinatesHUDMod = new CoordinatesHUD();
     public static KeystrokesHUD keystrokesHUDMod = new KeystrokesHUD();
+    public static Freelook freelookMod = new Freelook();
 
     @Override
     public void onInitializeClient() {
@@ -50,6 +52,7 @@ public class OnyxClientCoreClient implements ClientModInitializer {
         ModManager.getInstance().register(oldCombatMod);
         ModManager.getInstance().register(coordinatesHUDMod);
         ModManager.getInstance().register(keystrokesHUDMod);
+        ModManager.getInstance().register(freelookMod);
 
         // Register mod tick events
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
