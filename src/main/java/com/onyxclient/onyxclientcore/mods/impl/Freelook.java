@@ -2,6 +2,7 @@ package com.onyxclient.onyxclientcore.mods.impl;
 
 import com.onyxclient.onyxclientcore.mods.Mod;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.Perspective;
 
 
 public class Freelook extends Mod {
@@ -11,19 +12,21 @@ public class Freelook extends Mod {
         this.enabled = false;
     }
 
-    public void init() {
+    private Perspective lastPerspective;
 
+    @Override
+    public void init() {
+        MinecraftClient client = MinecraftClient.getInstance();
+        lastPerspective = client.options.getPerspective();
+
+        if (lastPerspective == Perspective.FIRST_PERSON) {
+            client.options.setPerspective(Perspective.THIRD_PERSON_BACK);
+        }
     }
 
-    public void update() {
+    @Override
+    public void close() {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null) return;
-        if (client.cameraEntity == null) return;
-        double mouseX = client.mouse.getX();
-        float sensitivity = 0.03F;
-
-        float yaw = client.cameraEntity.getYaw() + (float) mouseX * sensitivity;
-
-        client.cameraEntity.setYaw(yaw);
+        if (lastPerspective != client.options.getPerspective()) client.options.setPerspective(lastPerspective);
     }
 }

@@ -5,7 +5,8 @@
 	"mixins": [
 		"TitleScreenMixin",
 		"MinecraftClientMixin",
-		"PlayerEntityMixin"
+		"PlayerEntityMixin",
+		"EntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

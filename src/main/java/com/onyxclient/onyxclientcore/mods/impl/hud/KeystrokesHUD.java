@@ -27,6 +27,7 @@ public class KeystrokesHUD extends Mod {
     private boolean rmbPressed = false; // Right Mouse Button
     private boolean jumpPressed = false; // Space
 
+    @Override
     public void init() {
         if (hudEventRegistered) return;
         HudRenderCallback.EVENT.register(this::onRenderHud);
