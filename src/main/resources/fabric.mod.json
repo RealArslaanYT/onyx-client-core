@@ -2,15 +2,15 @@
 	"schemaVersion": 1,
 	"id": "onyx-client-core",
 	"version": "${version}",
-	"name": "Onyx Client (Core)",
-	"description": "Core mod for Onyx Client",
+	"name": "Onyx Client",
+	"description": "Onyx Client - a new, modern client for Minecraft 1.21.5.",
 	"authors": [
 		"Arslaan Pathan"
 	],
 	"contact": {
 		"homepage": "https://arslaanpathan3102.carrd.co/"
 	},
-	"license": "CC0-1.0",
+	"license": "Apache-2.0",
 	"icon": "assets/onyx-client-core/icon.png",
 	"environment": "*",
 	"entrypoints": {
