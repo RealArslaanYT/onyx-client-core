@@ -6,7 +6,8 @@
 		"TitleScreenMixin",
 		"MinecraftClientMixin",
 		"PlayerEntityMixin",
-		"EntityMixin"
+		"EntityMixin",
+		"CameraMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

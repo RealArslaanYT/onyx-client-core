@@ -22,6 +22,7 @@ public class OnyxClientCoreClient implements ClientModInitializer {
     public static CoordinatesHUD coordinatesHUDMod = new CoordinatesHUD();
     public static KeystrokesHUD keystrokesHUDMod = new KeystrokesHUD();
     public static Freelook freelookMod = new Freelook();
+    public static KeyBinding freelookKeybinding;
 
     @Override
     public void onInitializeClient() {
@@ -32,6 +33,15 @@ public class OnyxClientCoreClient implements ClientModInitializer {
                 GLFW.GLFW_KEY_RIGHT_SHIFT,
                 "category.onyxclient"
         ));
+
+        freelookKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.onyxclient.freelook",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_LEFT_ALT,
+                "category.onyxclient"
+        ));
+
+
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (modMenuKeyBind.wasPressed()) {
