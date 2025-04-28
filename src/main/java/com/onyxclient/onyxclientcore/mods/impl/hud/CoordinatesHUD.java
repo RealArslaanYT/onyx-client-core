@@ -14,7 +14,7 @@ public class CoordinatesHUD extends Mod {
     public boolean hudEventRegistered = false;
     public CoordinatesHUD() {
         this.name = "Coordinates HUD";
-        this.description = "Shows your coordinates/XYZ position in the HUD!";
+        this.description = "Shows your coordinates/XYZ position and your FPS in the HUD!";
         this.enabled = false;
     }
 
@@ -33,11 +33,14 @@ public class CoordinatesHUD extends Mod {
         String playerX = String.valueOf(Math.round(player.getPos().x));
         String playerY = String.valueOf(Math.round(player.getPos().y));
         String playerZ = String.valueOf(Math.round(player.getPos().z));
-        String coordsString = "X: " + playerX + " Y: " + playerY + " Z: " + playerZ;
+        String coords = "X: " + playerX + " Y: " + playerY + " Z: " + playerZ;
+        String fps = MinecraftClient.getInstance().getCurrentFps() + " fps";
 
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         float alpha = 1.0F;
         int i = MathHelper.ceil(alpha * 255.0F) << 24;
-        drawContext.drawTextWithShadow(textRenderer, Text.of(coordsString), 2, 2, 16777215 | i);
+        int fontHeight = textRenderer.fontHeight;
+        drawContext.drawTextWithShadow(textRenderer, Text.of(coords), 2, 2, 16777215 | i);
+        drawContext.drawTextWithShadow(textRenderer, Text.of(fps), 2, fontHeight + 2, 16777215 | i);
     }
 }
