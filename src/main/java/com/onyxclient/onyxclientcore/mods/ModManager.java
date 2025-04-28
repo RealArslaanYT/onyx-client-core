@@ -69,6 +69,7 @@ public class ModManager {
                     String state = properties.getProperty(modName);
                     if (state != null && state.equals("true")) {
                         mod.enabled = true;
+                        mod.init();
                     } else {
                         mod.enabled = false;
                     }
