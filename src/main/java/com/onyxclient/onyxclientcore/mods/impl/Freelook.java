@@ -22,7 +22,6 @@ public class Freelook extends Mod {
         this.enabled = false;
     }
 
-    private boolean hudEventRegistered = false;
     private boolean wasCinematicCamera = false;
     public boolean isFreelooking = false;
     private Perspective lastPerspective = Perspective.FIRST_PERSON;
@@ -51,27 +50,6 @@ public class Freelook extends Mod {
             client.options.smoothCameraEnabled = true;
             wasCinematicCamera = false;
         }
-    }
-
-    private void onHudRender(DrawContext context, RenderTickCounter renderTickCounter) {
-        if (MinecraftClient.getInstance().player == null) return;
-        if (!this.isFreelooking) return;
-        if (!isEnabled()) return;
-
-        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-        String text = "Freelook is active!";
-        int textWidth = textRenderer.getWidth(text);
-        int width = context.getScaledWindowWidth();
-        int textX = (width / 2) - (textWidth / 2);
-        float alpha = 1.0F;
-        int i = MathHelper.ceil(alpha * 255.0F) << 24;
-        context.drawTextWithShadow(textRenderer, Text.of(text), textX, 2, 0x00FF00 | i);
-    }
-
-    public void init() {
-        if (hudEventRegistered) return;
-        HudRenderCallback.EVENT.register(this::onHudRender);
-        hudEventRegistered = true;
     }
 
     public void update() {
