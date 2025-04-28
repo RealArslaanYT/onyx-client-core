@@ -9,8 +9,9 @@ Onyx Client aims to make your Minecraft gameplay smoother and more enjoyable, of
 - Coordinates HUD
 - Keystrokes HUD
 - Freelook
+- Mod state saving (keeps your preferences!)
 
 **To be added soon**:
-- Saving state of mods
+- Armor HUD
 
 Onyx Client provides a more polished and customizable Minecraft experience, perfect for players looking to enhance their client with modern features and easy-to-use tools.

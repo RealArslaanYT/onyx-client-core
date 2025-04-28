@@ -64,7 +64,9 @@ public class OnyxClientCoreClient implements ClientModInitializer {
         ModManager.getInstance().register(keystrokesHUDMod);
         ModManager.getInstance().register(freelookMod);
 
-        // Register mod tick events
+        ModManager.getInstance().loadModStates();
+
+        // Register ModManager events (tick/close)
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             ModManager.getInstance().update();
         });
