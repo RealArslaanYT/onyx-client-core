@@ -23,8 +23,9 @@ public class Freelook extends Mod {
     }
 
     private boolean hudEventRegistered = false;
+    private boolean wasCinematicCamera = false;
     public boolean isFreelooking = false;
-    private Perspective lastPerspective;
+    private Perspective lastPerspective = Perspective.FIRST_PERSON;
 
     public void startFreelooking() {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -33,6 +34,12 @@ public class Freelook extends Mod {
         if (lastPerspective == Perspective.FIRST_PERSON) {
             client.options.setPerspective(Perspective.THIRD_PERSON_BACK);
         }
+
+        if (client.options.smoothCameraEnabled) {
+            wasCinematicCamera = true;
+            client.options.smoothCameraEnabled = false;
+        }
+
         isFreelooking = true;
     }
 
@@ -40,6 +47,10 @@ public class Freelook extends Mod {
         isFreelooking = false;
         MinecraftClient client = MinecraftClient.getInstance();
         if (lastPerspective != client.options.getPerspective()) client.options.setPerspective(lastPerspective);
+        if (wasCinematicCamera) {
+            client.options.smoothCameraEnabled = true;
+            wasCinematicCamera = false;
+        }
     }
 
     private void onHudRender(DrawContext context, RenderTickCounter renderTickCounter) {

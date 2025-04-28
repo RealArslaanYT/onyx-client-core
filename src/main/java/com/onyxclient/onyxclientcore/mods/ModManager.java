@@ -86,7 +86,7 @@ public class ModManager {
             properties.setProperty(mod.getName(), String.valueOf(mod.isEnabled()));
         }
         try (FileOutputStream fos = new FileOutputStream(CONFIG_FILE)) {
-            properties.store(fos, "Mod States");
+            properties.store(fos, "Onyx Client - Mod States");
         } catch (IOException e) {
             OnyxClientCore.LOGGER.error("Failed to save mod states");
         }
