@@ -10,7 +10,8 @@
 	"contact": {
 		"homepage": "https://arslaanpathan3102.carrd.co/"
 	},
-	"license": "Apache-2.0",
+	"license": "AGPL-3.0",
+	"licenseFile": "LICENSE",
 	"icon": "assets/onyx-client-core/icon.png",
 	"environment": "*",
 	"entrypoints": {
