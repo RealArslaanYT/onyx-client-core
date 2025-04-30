@@ -4,6 +4,7 @@ import com.onyxclient.onyxclientcore.mods.ModManager;
 import com.onyxclient.onyxclientcore.gui.ModMenuScreen;
 import com.onyxclient.onyxclientcore.mods.impl.Freelook;
 import com.onyxclient.onyxclientcore.mods.impl.OldCombat;
+import com.onyxclient.onyxclientcore.mods.impl.hud.ArmorHUD;
 import com.onyxclient.onyxclientcore.mods.impl.hud.CoordinatesHUD;
 import com.onyxclient.onyxclientcore.mods.impl.hud.KeystrokesHUD;
 import net.fabricmc.api.ClientModInitializer;
@@ -23,6 +24,7 @@ public class OnyxClientCoreClient implements ClientModInitializer {
     public static KeystrokesHUD keystrokesHUDMod = new KeystrokesHUD();
     public static Freelook freelookMod = new Freelook();
     public static KeyBinding freelookKeybinding;
+    public static ArmorHUD armorHUDMod = new ArmorHUD();
 
     @Override
     public void onInitializeClient() {
@@ -63,6 +65,7 @@ public class OnyxClientCoreClient implements ClientModInitializer {
         ModManager.getInstance().register(coordinatesHUDMod);
         ModManager.getInstance().register(keystrokesHUDMod);
         ModManager.getInstance().register(freelookMod);
+        ModManager.getInstance().register(armorHUDMod);
 
         ModManager.getInstance().loadModStates();
 

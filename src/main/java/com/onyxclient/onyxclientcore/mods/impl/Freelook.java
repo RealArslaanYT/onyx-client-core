@@ -19,7 +19,7 @@ public class Freelook extends Mod {
     public Freelook() {
         this.name = "Freelook";
         this.description = "Allows you to look freely in third person!";
-        this.enabled = false;
+        this.setEnabled(false);
     }
 
     private boolean wasCinematicCamera = false;

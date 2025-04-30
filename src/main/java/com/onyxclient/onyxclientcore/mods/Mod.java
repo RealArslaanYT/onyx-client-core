@@ -3,7 +3,7 @@ package com.onyxclient.onyxclientcore.mods;
 public class Mod {
     public String name;
     public String description;
-    public boolean enabled = false;
+    private boolean enabled = false;
 
     public String getName() {
         return name;
@@ -16,6 +16,8 @@ public class Mod {
     public boolean isEnabled() {
         return enabled;
     }
+
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
     public void init() {
         // Runs before mod starts

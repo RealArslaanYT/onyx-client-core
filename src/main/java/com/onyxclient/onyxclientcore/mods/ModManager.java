@@ -29,7 +29,7 @@ public class ModManager {
     }
 
     public boolean toggleMod(Mod mod) {
-        mod.enabled = !mod.enabled;
+        mod.setEnabled(!mod.isEnabled());
         if (mod.isEnabled()) {
             mod.init();
         } else {
@@ -68,10 +68,10 @@ public class ModManager {
                     String modName = mod.getName();
                     String state = properties.getProperty(modName);
                     if (state != null && state.equals("true")) {
-                        mod.enabled = true;
+                        mod.setEnabled(true);
                         mod.init();
                     } else {
-                        mod.enabled = false;
+                        mod.setEnabled(false);
                     }
                 }
             } catch (IOException e) {

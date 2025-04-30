@@ -14,7 +14,7 @@ public class KeystrokesHUD extends Mod {
     public KeystrokesHUD() {
         this.name = "Keystrokes HUD";
         this.description = "Displays your keystrokes!";
-        this.enabled = false;
+        this.setEnabled(false);
     }
 
     private boolean hudEventRegistered = false;

@@ -11,11 +11,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 
 public class CoordinatesHUD extends Mod {
-    public boolean hudEventRegistered = false;
+    private boolean hudEventRegistered = false;
     public CoordinatesHUD() {
         this.name = "Coordinates HUD";
         this.description = "Shows your coordinates/XYZ position and your FPS in the HUD!";
-        this.enabled = false;
+        this.setEnabled(false);
     }
 
     @Override
