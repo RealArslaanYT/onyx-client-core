@@ -63,6 +63,7 @@ public class Freelook extends Mod {
 
         if (!this.isFreelooking && player != null) {
             ((FreelookCameraAccess) player).setFreelookYaw(player.getYaw());
+            ((FreelookCameraAccess) player).setFreelookPitch(player.getPitch());
         }
     }
 

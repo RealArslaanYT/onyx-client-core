@@ -1,19 +1,19 @@
 package com.onyxclient.onyxclientcore.mods.impl.hud;
 
-import com.onyxclient.onyxclientcore.OnyxClientCore;
 import com.onyxclient.onyxclientcore.mods.Mod;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
+import net.minecraft.util.math.MathHelper;
 
 public class ArmorHUD extends Mod {
     public ArmorHUD() {
@@ -30,54 +30,39 @@ public class ArmorHUD extends Mod {
         hudEventRegistered = true;
     }
 
-    private void onRenderHud(DrawContext context, RenderTickCounter renderTickCounter) {
+    private void onRenderHud(DrawContext context, RenderTickCounter tickCounter) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (player == null) return;
-        if (!this.isEnabled()) return;
-        ItemStack helmet = player.getEquippedStack(EquipmentSlot.HEAD);
-        ItemStack chestplate = player.getEquippedStack(EquipmentSlot.CHEST);
-        ItemStack leggings = player.getEquippedStack(EquipmentSlot.LEGS);
-        ItemStack boots = player.getEquippedStack(EquipmentSlot.FEET);
+        if (player == null || !this.isEnabled()) return;
 
-        Identifier helmetId = Registries.ITEM.getId(helmet.getItem());
-        Identifier chestplateId = Registries.ITEM.getId(chestplate.getItem());
-        Identifier leggingsId = Registries.ITEM.getId(leggings.getItem());
-        Identifier bootsId = Registries.ITEM.getId(boots.getItem());
+        EquipmentSlot[] slots = {
+                EquipmentSlot.HEAD, EquipmentSlot.CHEST,
+                EquipmentSlot.LEGS, EquipmentSlot.FEET
+        };
 
-        boolean renderHelmet = true;
-        boolean renderChestplate = true;
-        boolean renderLeggings = true;
-        boolean renderBoots = true;
+        int height = context.getScaledWindowHeight();
+        int width = context.getScaledWindowWidth();
+        int baseX = width - 24;
+        int baseY = height - 72;
 
-        if (helmetId.toString().equals("minecraft:air")) {
-            renderHelmet = false;
+        for (int i = 0; i < slots.length; i++) {
+            ItemStack stack = player.getEquippedStack(slots[i]);
+            if (!stack.isEmpty()) {
+                int x = baseX;
+                int y = baseY + i * 18;
+
+                int maxDurability = stack.getMaxDamage();
+                int currentDurability = stack.getDamage();
+                int durabilityPercentage = Math.round(((float) (maxDurability - currentDurability) / maxDurability) * 100);
+
+                context.drawItem(stack, x, y);
+
+                String durabilityText = durabilityPercentage + "%";
+                TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+                int textWidth = textRenderer.getWidth(durabilityText);
+                float alpha = 1.0F;
+                int alphaI = MathHelper.ceil(alpha * 255.0F) << 24;
+                context.drawTextWithShadow(textRenderer, durabilityText, x - textWidth - 8, (y + 8) - (textRenderer.fontHeight / 2), 16777215 | alphaI);
+            }
         }
-        if (chestplateId.toString().equals("minecraft:air")) {
-            renderChestplate = false;
-        }
-        if (leggingsId.toString().equals("minecraft:air")) {
-            renderLeggings = false;
-        }
-        if (bootsId.toString().equals("minecraft:air")) {
-            renderBoots = false;
-        }
-
-        if (renderHelmet) {
-            String[] parts = helmetId.toString().split(":");
-            String namespace = parts[0];
-            String itemName = parts[1];
-
-            String texturePath = "textures/item/" + itemName + ".png";
-
-            Identifier helmetTextureId = Identifier.of(namespace, texturePath);
-
-            float alpha = 1.0F;
-            int color = ColorHelper.getWhite(alpha);
-            int width = context.getScaledWindowWidth();
-            int height = context.getScaledWindowHeight();
-            context.drawTexture(RenderLayer::getGuiTexturedOverlay, helmetTextureId, 2, height - 72, 0, 0, 16, 16, 16, 16, color);
-        }
-
     }
 }
