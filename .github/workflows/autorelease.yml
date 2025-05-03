@@ -57,7 +57,7 @@ jobs:
         uses: cloudnode-pro/modrinth-publish@v2
         with:
           token: ${{ secrets.MODRINTH_TOKEN }}
-          project: onyx-client
+          project: sIVsLoIb
           name: "Onyx Client ${{ github.ref_name }}"
           version: ${{ env.VERSION_NUMBER }}
           changelog: ""
