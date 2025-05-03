@@ -63,4 +63,4 @@ jobs:
           game-versions: |-
             1.21.5
           files: ${{ steps.get-jar.outputs.jar }}
-          dependencies: '[{"project_id":"fabric-api","dependency_type":"required"}]'
+          dependencies: '[{"project_id":"P7dR8mSH","dependency_type":"required"}]'
