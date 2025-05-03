@@ -3,7 +3,7 @@
 	"id": "onyx-client-core",
 	"version": "${version}",
 	"name": "Onyx Client",
-	"description": "Onyx Client - a new, modern client for Minecraft 1.21.5 aiming to enhance the user experience and add new features.",
+	"description": "Onyx Client - a new, modern client for Minecraft 1.21.5 aiming to enhance the user experience and add new features to Minecraft.",
 	"authors": [
 		"Arslaan Pathan"
 	],
