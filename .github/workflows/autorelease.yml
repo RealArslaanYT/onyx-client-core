@@ -58,9 +58,7 @@ jobs:
           name: "Onyx Client ${{ github.ref_name }}"
           version: ${{ github.ref_name }}
           changelog: ""
-          loaders: |-
-            fabric
-          game-versions: |-
-            1.21.5
+          loaders: fabric
+          game-versions: 1.21.5
           files: ${{ steps.get-jar.outputs.jar }}
           dependencies: '[{"project_id":"P7dR8mSH","dependency_type":"required"}]'
