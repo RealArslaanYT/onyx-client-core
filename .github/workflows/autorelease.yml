@@ -50,13 +50,16 @@ jobs:
           JAR_FILE=$(find build/libs -maxdepth 1 -type f -name "*.jar" ! -name "*-sources.jar" | head -n 1)
           echo "jar=$JAR_FILE" >> "$GITHUB_OUTPUT"
 
+      - name: Remove first character from version tag
+        run: echo "VERSION_NUMBER=${GITHUB_REF_NAME:1}" >> $GITHUB_ENV
+
       - name: Upload to Modrinth
         uses: cloudnode-pro/modrinth-publish@v2
         with:
           token: ${{ secrets.MODRINTH_TOKEN }}
           project: onyx-client
           name: "Onyx Client ${{ github.ref_name }}"
-          version: ${{ github.ref_name }}
+          version: ${{ env.VERSION_NUMBER }}
           changelog: ""
           loaders: fabric
           game-versions: 1.21.5
