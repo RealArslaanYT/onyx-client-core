@@ -44,3 +44,16 @@ jobs:
           name: "Onyx Client ${{ github.ref_name }} for Minecraft 1.21.5"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: onyx-client
+          name: "Onyx Client ${{ github.ref_name }} for Minecraft 1.21.5"
+          version: ${{ github.ref_name }}
+          changelog: ""
+          loaders: |-
+            fabric
+          game-versions: |-
+            1.21.5
+          files: build/libs/*
