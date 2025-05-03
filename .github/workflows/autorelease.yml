@@ -44,16 +44,28 @@ jobs:
           name: "Onyx Client ${{ github.ref_name }} for Minecraft 1.21.5"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get built JAR path
+        id: get-jar
+        run: |
+          JAR_FILE=$(find build/libs -maxdepth 1 -type f -name "*.jar" ! -name "*-sources.jar" | head -n 1)
+          echo "jar=$JAR_FILE" >> "$GITHUB_OUTPUT"
+
       - name: Upload to Modrinth
         uses: cloudnode-pro/modrinth-publish@v2
         with:
           token: ${{ secrets.MODRINTH_TOKEN }}
           project: onyx-client
-          name: "Onyx Client ${{ github.ref_name }} for Minecraft 1.21.5"
+          name: "Onyx Client ${{ github.ref_name }}"
           version: ${{ github.ref_name }}
           changelog: ""
           loaders: |-
             fabric
           game-versions: |-
             1.21.5
-          files: build/libs/*
+          files: ${{ steps.get-jar.outputs.jar }}
+          dependencies: |-
+            [{
+                "project_id": "fabric-api",
+                "dependency_type": "required"
+            }]
+
